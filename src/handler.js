@@ -9,8 +9,7 @@ export const getHandler = async (ctx) => {
   ctx.body = report[word]
 }
 
-const accumulate = (chunk) => {
-  const broken = chunk
+const accumulate = (chunk) => chunk
   .replaceAll('-', ' ')
   .replaceAll(',', ' ')
   .replaceAll('\"', ' ')
@@ -20,22 +19,17 @@ const accumulate = (chunk) => {
   .toLowerCase()
   .split(' ')
   .filter(x => !!x)
-
-  broken.reduce((acc, cur) => {
+  .reduce((acc, cur) => {
     acc[cur] = acc[cur] || 0
     acc[cur] += 1
-
     report[cur] = report[cur] || 0
     report[cur] += acc[cur]
-
     return acc
   }, {})
-}
 
 // chunk_1 = ' dishonest  yawning  mustache '
 // chunk_2 = 'immoral  dishonest  yawning  mustache  suppl'
 // chunk_3 = 'ment whirlwind  clash  terence  lamentable  bennett '
-
 const handleStream = (url) => new Promise((resolve) => {
   let previousChunk = ''
   https.get(url, (stream) => {
