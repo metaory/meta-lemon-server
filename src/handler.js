@@ -32,17 +32,16 @@ const accumulate = (chunk) => chunk
 // chunk_1 = ' dishonest  yawning  mustache '
 // chunk_2 = 'immoral  dishonest  yawning  mustache  suppl'
 // chunk_3 = 'ment whirlwind  clash  terence  lamentable  bennett '
-const handleStream = (url) => new Promise((resolve) => {
-  let previousChunk = ''
+const handleStream = (url) => new Promise((resolve, reject) => {
+  // let previousChunk = ''
   https.get(url, (stream) => {
     stream.setEncoding('utf8')
     stream.on('data', (chunk) => {
       accumulate(chunk)
       console.log('>>>' + chunk + '<<<')
     })
-    stream.on('end', () => {
-      resolve()
-    })
+    stream.on('error', reject)
+    stream.on('end', resolve)
   })
 })
 
