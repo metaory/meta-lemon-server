@@ -2,6 +2,7 @@
   "name": "lemonade",
   "version": "1.0.0",
   "main": "index.js",
+  "author": "metaory <metaory@gmail.com>",
   "license": "MIT",
   "type": "module",
   "scripts": {
