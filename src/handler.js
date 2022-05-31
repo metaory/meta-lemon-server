@@ -32,7 +32,7 @@ const accumulate = (chunk) => chunk
 // chunk_1 = ' dishonest  yawning  mustache '
 // chunk_2 = 'immoral  dishonest  yawning  mustache  suppl'
 // chunk_3 = 'ment whirlwind  clash  terence  lamentable  bennett '
-const handleStream = (url) => new Promise((resolve, reject) => {
+const streamify = (url) => new Promise((resolve, reject) => {
   // let previousChunk = ''
   https.get(url, (stream) => {
     stream.setEncoding('utf8')
@@ -47,7 +47,7 @@ const handleStream = (url) => new Promise((resolve, reject) => {
 
 export const postHandler = async (ctx) => {
   const { url } = ctx.request.body
-  await handleStream(url)
+  await streamify(url)
   ctx.body = { report }
 }
 

@@ -3,7 +3,7 @@ export default async (ctx, next) => {
   try {
     await next()
     const status = ctx.status
-    ctx.body = { ok: status === 200, ...ctx.body }
+    ctx.body = { ok: status === 200, data: ctx.body }
     ctx.status = status
   } catch ({ message: error }) {
     ctx.body = { ok: false, error }
