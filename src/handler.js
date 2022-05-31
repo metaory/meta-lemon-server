@@ -1,4 +1,4 @@
-import fs from 'fs'
+// import fs from 'fs'
 // import axios from 'axios'
 import https from 'https'
 
@@ -12,7 +12,7 @@ export const getHandler = async (ctx) => {
 const accumulate = (chunk) => chunk
   .replaceAll('-', ' ')
   .replaceAll(',', ' ')
-  .replaceAll('\"', ' ')
+  .replaceAll('"', ' ')
   .replaceAll('\t', ' ')
   .replaceAll('\n', ' ')
   .replaceAll('\r', ' ')
@@ -22,7 +22,7 @@ const accumulate = (chunk) => chunk
   .reduce((acc, cur) => {
     acc[cur] = acc[cur] || 0
     acc[cur] += 1
-    // XXX SideEffect !!! 
+    // XXX SideEffect !!!
     // TODO replace with db.write(cur)
     report[cur] = report[cur] || 0
     report[cur] += acc[cur]
@@ -50,4 +50,3 @@ export const postHandler = async (ctx) => {
   await streamify(url)
   ctx.body = { report }
 }
-
