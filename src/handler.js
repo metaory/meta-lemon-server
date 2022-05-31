@@ -22,6 +22,7 @@ const accumulate = (chunk) => chunk
   .reduce((acc, cur) => {
     acc[cur] = acc[cur] || 0
     acc[cur] += 1
+    // XXX SideEffect !!! 
     // TODO replace with db.write(cur)
     report[cur] = report[cur] || 0
     report[cur] += acc[cur]
