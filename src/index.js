@@ -10,10 +10,10 @@ const router = new Router()
 const server = app.listen(3000)
 
 app.use(bodyParser())
-app.use(middleware)
+// app.use(middleware)
 
 router
-  .get('/', getHandler)
+  .get('/words/:word', getHandler)
   .post('/', postHandler)
 
 app
